@@ -1,0 +1,264 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.searchBar{
+	margin-left: 25%;
+	margin-bottom: 10px;
+	width: 50%;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	text-align: center;
+	box-shadow: 0px 0px 0px 2px rgba(194,138,138,0.28);
+-webkit-box-shadow: 0px 0px 0px 2px rgba(194,138,138,0.28);
+-moz-box-shadow: 0px 0px 0px 2px rgba(194,138,138,0.28);
+}
+/* listRecords.css */
+.table {
+  font-size: 16px; /* Increase the font size of the table */
+}
+
+/* Increase the font size of table headers (th) */
+.table th {
+  font-size: 18px;
+}
+
+/* Increase the font size of table cells (td) */
+.table td {
+  font-size: 14px;
+}
+
+/* Increase the font size of the "Not yet returned" message */
+.not-returned {
+  font-size: 14px;
+}
+
+/* Add any other custom styles here */
+.deleteButton{
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+.navbar{
+  height:100px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: flex-start;
+}
+.list{
+  display: flex;
+  align-items: center;
+  list-style :none;
+}
+.listItem{
+margin-right: 20px;
+font-weight: 500;
+cursor: pointer;
+font-size: 12px;
+}
+.listItem a {
+  text-decoration: none;
+}
+.avatar{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.logo{
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+.login {
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 60%;
+  height: 75%;
+  -webkit-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
+  box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+}
+.left,.right{
+  flex: 1 ;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.center{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.or{
+  border: 2px solid lightgray ;
+  border-radius: 50%;
+  padding: 10px;
+  color: gray;
+  background-color: white;
+  font-weight: bold;
+
+}
+
+.line{
+  width: 0.5px;
+  height: 70%;
+  background-color: lightgray;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: -1;
+}
+.loginButton{
+  width: 150px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+.google{
+  background-color: #df4930;
+}
+.facebook{
+  background-color: #507cc0;
+}
+.github{
+  background-color: black;
+}
+.icon{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+input{
+  width: 200px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+}
+.loginTitle{
+  position: absolute;
+  top: 150px;
+  color:lightgray
+}
+.submit{
+  width: 200px;
+  background-color: #16A6FB;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+.button-21 {
+  align-items: center;
+  appearance: none;
+  background-color: #3EB2FD;
+  background-image: linear-gradient(1deg, #4F58FD, #149BF3 99%);
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd,sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color .2s,background-position .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.button-21:active,
+.button-21:focus {
+  outline: none;
+}
+
+.button-21:hover {
+  background-position: -20px -20px;
+}
+
+.button-21:focus:not(:active) {
+  box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+.userName{
+  color: red;
+  font-style: italic;
+  font-weight: bold;
+  padding-right: 10px;
+  font-size: 15px;
+  padding-top: 10px;
+
+}
+
+.logoImage{
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+}
