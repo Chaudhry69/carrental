@@ -1,12 +1,68 @@
-// Import important packages
 const express = require('express');
+const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const dotenv = require('dotenv').config()
+const User = require('../Model/user'); // Import the User schema
+
 const recordRoute = express.Router();
+recordRoute.use(bodyParser.json());
+recordRoute.use(cors());
+
+
+//Generate Token
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "2d" });
+};
+
+
+// Signup route
+recordRoute.post('/signup', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      email,
+      password: hashedPassword,
+    });
+
+    await newUser.save();
+
+    res.json({ message: 'User registered successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+// Login route
+recordRoute.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
+
+    res.json({_id: newUser.id,
+      token: generateToken()});
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
 
 // Import the Record model
 let recordModel = require('../Model/Records');
 
 // To Get List Of Records
-recordRoute.route('/').get(async function (req, res) {
+recordRoute.route('/records').get(async function (req, res) {
     try {
       const records = await recordModel.find();
       res.json(records);
@@ -15,6 +71,8 @@ recordRoute.route('/').get(async function (req, res) {
       res.status(500).send("Something went wrong");
     }
   });
+
+  //record by id/single record
   recordRoute.route('/record/:id').get(async function (req, res) {
     try {
       const records = await recordModel.findById(req.params.id);
@@ -67,26 +125,6 @@ recordRoute.route('/editRecord/:id').put(async function (req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-//   let id = req.params.id;
-//   recordModel.findById(id, function (err, record) {
-//     if (err) {
-//       res.status(400).send("Unable To Find Record");
-//     } else {
-//       res.json(record);
-//     }recordRoute.route('/editRecord/:id').get(function (req, res) {
-
-//   });
-// });
 
 recordRoute.route('/updateRecord/:id').post(async function (req, res) {
   try {

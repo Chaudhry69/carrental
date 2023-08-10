@@ -2,18 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import "../index.css";
 import "../App.css";
-
-
 
 const divStyle = {
   margin: "5% 8%",
 };
 
-function ListRecords() {
-  const { isAuthenticated } = useAuth0(); // Get authentication state
+function ListRecords({ loggedIn }) {
   const [records, setRecords] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -35,7 +31,7 @@ function ListRecords() {
 
   const deleteRecord = (recordId) => {
     axios
-      .delete(`http://localhost:4000/api/records/deleteRecord/${recordId}`)
+      .delete(`http://localhost:4000/api/deleteRecord/${recordId}`)
       .then(() => {
         getRecordList();
       })
@@ -57,11 +53,13 @@ function ListRecords() {
   };
 
   const formattedRecords = filterRecords().map((record, i) => {
-    const formattedDateOut = new Date(record.dateOut).toISOString().split('T')[0];
-    const formattedDatein = new Date(record.dateIn).toISOString().split('T')[0];
+    const formattedDateOut = new Date(record.dateOut)
+      .toISOString()
+      .split("T")[0];
+    const formattedDatein = new Date(record.dateIn).toISOString().split("T")[0];
     return (
       <tr key={i}>
-        <td>{i}</td>
+        <td>{i + 1}</td>
         <td>{record.Name}</td>
         <td>{record.cnic}</td>
         <td>{record.carName}</td>
@@ -76,37 +74,28 @@ function ListRecords() {
           )}
         </td>
         <td>
-  {isAuthenticated ? (
-    // Show the Edit button for authenticated users
-    <Link to={`/editRecord/${record._id}`} className="btn btn-primary">
-  Edit Record
-</Link>
-  ) : (
-    // Show a blank space for non-authenticated users
-    <></>
-  )}
-</td>
-<td>
-  {isAuthenticated ? (
-    // Show the Delete button for authenticated users
-    <Button
-      onClick={() => deleteRecord(record._id)}
-      className="btn btn-danger"
-    >
-      Delete
-    </Button>
-  ) : (
-    // Show a blank space for non-authenticated users
-    <></>
-  )}
-</td>
+          {loggedIn && (
+            <Link to={`/editRecord/${record._id}`} className="btn btn-primary">
+              Edit Record
+            </Link>
+          )}
+        </td>
+        <td>
+          {loggedIn && (
+            <Button
+              onClick={() => deleteRecord(record._id)}
+              className="btn btn-danger"
+            >
+              Delete
+            </Button>
+          )}
+        </td>
       </tr>
     );
   });
 
   return (
     <div style={divStyle}>
-      {/* Search bar */}
       <input
         type="text"
         placeholder="Search by Name or CNIC"

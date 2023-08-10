@@ -29,9 +29,9 @@ const AddRecord = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:4000/api/records/addRecord", formData);
+      await axios.post("http://localhost:4000/api/addRecord", formData);
       console.log("Record added successfully");
-      window.location.href = "/";
+      window.location.href = "/list";
     } catch (error) {
       console.log(error);
     }

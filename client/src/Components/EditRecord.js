@@ -27,7 +27,7 @@ const EditRecord = () => {
 
   const getRecordById = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/records/record/${id}`);
+      const response = await axios.get(`http://localhost:4000/api/record/${id}`);
       const record = response.data;
       setFormData({
         ...record,
@@ -49,9 +49,9 @@ const EditRecord = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.put(`http://localhost:4000/api/records/editRecord/${id}`, formData);
+      await axios.put(`http://localhost:4000/api/editRecord/${id}`, formData);
       console.log("Record updated successfully");
-      navigate("/");
+      navigate("/list");
     } catch (error) {
       console.log(error);
     }
@@ -145,7 +145,7 @@ const EditRecord = () => {
         </label>
         <br />
         <input type="submit" value="Submit" className="btn btn-primary" />
-        <Link to="/" className="btn btn-secondary ms-2">
+        <Link to="/list" className="btn btn-secondary ms-2">
           Cancel
         </Link>
       </form>

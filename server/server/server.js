@@ -1,19 +1,18 @@
-// Imported required packages
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors'); // Import the cors package
 const mongoose = require('mongoose');
 
-// MongoDB Database URL
-const mongoDatabase = 'mongodb+srv://chaudhryfaiq69:user@cluster0.q9bo7ex.mongodb.net/test'; // Replace "your-database-name" with your actual database name
+// Import the User schema
+const User = require('../Model/user'); // Make sure to adjust the path to the User schema
 
-// Create express server
 const app = express();
 mongoose.Promise = global.Promise;
 
-// Connect MongoDB Database
-mongoose.connect(mongoDatabase, { useNewUrlParser: true })
+const mongoDatabase = 'mongodb+srv://chaudhryfaiq69:user@cluster0.q9bo7ex.mongodb.net/test'; // Replace with your MongoDB connection string
+
+mongoose.connect(mongoDatabase, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Database is connected');
   })
@@ -21,20 +20,17 @@ mongoose.connect(mongoDatabase, { useNewUrlParser: true })
     console.log('There is a problem while connecting to the database: ' + err);
   });
 
-// Import routes
-const recordRoutes = require('../Routes/records.routes');
+const port = process.env.PORT || 4000;
 
-// Convert incoming data to JSON format
-app.use(bodyParser.json());
-
-// Enable CORS
+// Use the cors middleware
 app.use(cors());
 
-// Routes Configuration
-app.use('/api/records', recordRoutes);
+// Parse incoming request bodies as JSON
+app.use(bodyParser.json());
 
-// Set up server port
-const port = process.env.PORT || 4000;
+// Import and use the recordRoute router
+const recordRoute = require('../Routes/records.routes'); // Adjust the path accordingly
+app.use('/api', recordRoute); // Assuming you want to prefix all your routes with '/api'
 
 // Start the server
 app.listen(port, function () {
